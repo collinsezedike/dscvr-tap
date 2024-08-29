@@ -1,0 +1,42 @@
+.button {
+    position: relative;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    background-color: #4caf50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(red 360deg, transparent 0deg);
+}
+
+.time {
+    font-size: 40px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    z-index: 1;
+    width: 200px;
+    height: 200px;
+    background-color: gold;
+    animation: zoominout 1s infinite;
+}
+
+@keyframes zoominout {
+    0%,100%{
+        transform: scale(0.9);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+}

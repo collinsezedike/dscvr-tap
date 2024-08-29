@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { BoltIcon, TrophyIcon } from '@heroicons/react/24/solid'
 import './App.css'
+import TimerButton from './timerbutton.tsx'
 
 function App() {
   const[taps,setTaps] = useState(0)
@@ -76,17 +77,16 @@ function App() {
         <TrophyIcon className='icon'/>
       </div>
     </section>
+    <section id='main-container'>
       {
-        (!isPlaying) ? ( <button onClick={startGame} style={{marginBottom:16}}>Start Game</button> ) : (
+        (!isPlaying) ? ( <button onClick={startGame}>Start Game</button> ) : (
           <>
             <p style={{fontSize:16,marginBottom:16}}>Time Left : {timeLeft} secs</p>
-            <button onClick={handleTap} className='tap-btn'>
-              Tap!
-            </button>
+                <TimerButton  handleTap={handleTap}/>
+            <p style={{fontSize:16}}> Taps : {taps}</p>
           </>
         )
       }
-      <p style={{fontSize:16}}> Taps : {taps}</p>
       {
         (!isPlaying && taps > 0) && (
           <div style={{marginTop:16}}>
@@ -94,6 +94,7 @@ function App() {
           </div>
         )
       }
+    </section>
     </div>
   )
 }

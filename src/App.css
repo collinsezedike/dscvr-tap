@@ -24,6 +24,8 @@ button{
   max-width: 390px;
   border: 2px solid black;
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
 }
 #scores{
   display: flex;
@@ -31,13 +33,21 @@ button{
   padding: 5px 20px;
 }
 #scores div{
-  display: flex;
   align-items: center;
+  display: flex;
 }
 .icon{
   width: 30px;
   color:gold;
 }
+#main-container{
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .tap-btn{
   width:128px;
   height:128px;
