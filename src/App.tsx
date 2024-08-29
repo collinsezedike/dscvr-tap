@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { BoltIcon, TrophyIcon } from '@heroicons/react/24/solid'
 import './App.css'
 
 function App() {
@@ -65,8 +66,16 @@ function App() {
 
   return (
     <div className='container'>
-      <h1>Tapping Game</h1>
-      <p className='details'> Streak : {streak} days | High Score : {highScore} </p>
+    <section id='scores'>
+      <div>
+        <BoltIcon className='icon'/>
+      <p>{streak}</p>
+      </div>
+      <div>
+        <p>{highScore}</p>
+        <TrophyIcon className='icon'/>
+      </div>
+    </section>
       {
         (!isPlaying) ? ( <button onClick={startGame} style={{marginBottom:16}}>Start Game</button> ) : (
           <>
@@ -80,14 +89,11 @@ function App() {
       <p style={{fontSize:16}}> Taps : {taps}</p>
       {
         (!isPlaying && taps > 0) && (
-          // the div will be an alert component and the p tag will be alert description component 
           <div style={{marginTop:16}}>
             <p> Game Over! You tapped {taps} times</p>
           </div>
         )
       }
-      <p>you should consider adding the total number of token a user has won based on either a simple maths calculation or very complex one</p>
-      <p>also that streak stuff is .....</p>
     </div>
   )
 }

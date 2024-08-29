@@ -10,33 +10,58 @@
 body{
   background-color: gray;
   display: flex;
-  align-items: center;
+  padding: 20px;
   justify-content: center;
-  height: 100vh;
-  padding: 16px;
-}
-h1{
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 16px;
+  overflow: hidden;
 }
 button{
   cursor: pointer;
-  border:1px solid transparent;
 }
 .container{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding: 10px;
+  width: 100vw;
+  height: 95vh;
+  max-width: 390px;
+  border: 2px solid black;
+  border-radius: 15px;
 }
-.details{
-  font-size:30px;
-  margin-bottom: 16px;
+#scores{
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 20px;
+}
+#scores div{
+  display: flex;
+  align-items: center;
+}
+.icon{
+  width: 30px;
+  color:gold;
 }
 .tap-btn{
   width:128px;
   height:128px;
   border-radius:50%;
   font-size:48px
+}
+
+@media (max-width:425px) {
+  body{
+    padding: 0;
+  }
+  .container{
+    padding: 10px;
+    height: 100vh;
+    max-width: 100vw;
+    border: none;
+  }
+  #scores{
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 10px;
+  }
+  .icon{
+    width: 25px;
+    color:gold;
+  }
 }
