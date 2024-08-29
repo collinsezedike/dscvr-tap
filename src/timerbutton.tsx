@@ -29,7 +29,7 @@ function TimerButton({handleTap}:TimerButtonProps){
           background: `conic-gradient(red ${degrees}deg, transparent 0deg)`,
         }}
       ></div>
-      <button className="time" onClick={handleTap}>Tap</button>
+      <button className="time" onClick={handleTap}></button>
     </div>
   );
 };

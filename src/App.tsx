@@ -8,34 +8,44 @@ function App() {
   const[timeLeft,setTimeLeft] = useState(10)
   const[isPlaying,setIsPlaying] = useState(false)
   const[streak,setStreak] = useState(0)
-  const[highScore,setHighScore] = useState(0)
+  const[totalCoins,setTotalCoins] = useState(0)
 
   useEffect(()=>{
     const storedData = JSON.parse(localStorage.getItem('tappingGameData') ?? '{}')
     if(storedData){
-      setStreak(storedData.streak)
-      setHighScore(storedData.highScore)
+      setStreak(storedData.streak || 0)
+      setTotalCoins(storedData.totalCoins || 0)
       
       const lastPlayDate = new Date(storedData.lastPlayDate)
       const today = new Date()
 
-      if(today.toDateString() !== lastPlayDate.toDateString()){
-        if(today.getDate() - lastPlayDate.getDate() > 1){
-          setStreak(0)
-        }
+      // Calculate the difference in days
+      const diffInTime = today.getTime() - lastPlayDate.getTime()
+      const diffInDays = diffInTime / (1000 * 3600 * 24)
+
+      if(diffInDays >= 1 && diffInDays < 2) {
+        // If it's the next day
+        setStreak(prevStreak => prevStreak+1)
+      } else if(diffInDays >= 2) {
+        // If more than one day has passed, reset the streak
+        setStreak(0)
       }
     }
-  },[isPlaying])
+  },[])
 
   useEffect(()=>{
     let timer : number
     if(isPlaying && timeLeft > 0){
       timer = setTimeout(()=>setTimeLeft(timeLeft - 1),1000)
-    }else if(timeLeft === 0){
+    }
+    return ()=>clearTimeout(timer)
+  },[isPlaying,timeLeft])
+
+  useEffect(()=>{
+    if(timeLeft === 0){
       endGame()
     }
-    return ()=> clearTimeout(timer)
-  },[isPlaying,timeLeft])
+  },[timeLeft])
 
   const startGame = ()=>{
     setIsPlaying(true)
@@ -51,15 +61,12 @@ function App() {
 
   const endGame = ()=>{
     setIsPlaying(false)
-    setStreak(streak+1)
-    if(taps > highScore){
-      setHighScore(taps)
-    }
+    setTotalCoins(totalCoins+taps)
 
     const gameData = {
       streak,
-      highScore:Math.max(highScore,taps),
-      lastPlayData: new Date().toISOString()
+      totalCoins,
+      lastPlayData: new Date()
     }
 
     localStorage.setItem('tappingGameData',JSON.stringify(gameData))
@@ -73,10 +80,11 @@ function App() {
       <p>{streak}</p>
       </div>
       <div>
-        <p>{highScore}</p>
+        <p>{totalCoins}</p>
         <TrophyIcon className='icon'/>
       </div>
     </section>
+    <h3 className='title'>DSCVR Tap Squad</h3>
     <section id='main-container'>
       {
         (!isPlaying) ? ( <button onClick={startGame}>Start Game</button> ) : (

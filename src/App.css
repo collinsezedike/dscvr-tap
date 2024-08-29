@@ -46,13 +46,12 @@ button{
   flex: 1;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 60px;
 }
-
-.tap-btn{
-  width:128px;
-  height:128px;
-  border-radius:50%;
-  font-size:48px
+.title{
+  margin-top: 40px;
+  font-size: 25px;
+  text-align: center;
 }
 
 @media (max-width:425px) {
